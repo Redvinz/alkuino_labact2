@@ -26,10 +26,7 @@ export default function Event() {
   const [eventData, setEventData] = React.useState([]);
 
   const addEvent = () => {
-    // Modify this function based on your requirements
-    // For UI-only, you can add some local state or handle the logic as needed
-    // You can simulate adding an event to the local state if needed.
-    // For example:
+
     setEventData((prevData) => [...prevData, { event, date }]);
   };
 

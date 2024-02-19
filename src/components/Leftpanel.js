@@ -1,13 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import inbox from "../images/inbox.png";
 import send from "../images/send.png";
 import snooze from "../images/snooze.png";
 import star from "../images/star.png";
-// import pen from "../images/pen.png";
 import Message from "./Message";
+// import pen from "../images/pen.png";
 // import Message from "./Message";
 
+
 function Leftpanel(props) {
+
+  const [hoveredItem, setHoveredItem] = useState(null);
+  const [activeItem, setActiveItem] = useState(null);
+
+  const handleMouseEnter = (itemName) => {
+    setHoveredItem(itemName);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredItem(null);
+  };
+
+  const handleClick = (itemName) => {
+    setActiveItem(itemName);
+  };
+
+
   return (
     <div
       style={{
@@ -20,22 +38,7 @@ function Leftpanel(props) {
         color: "#474849",
       }}
     >
-      {/* <div
-        style={{
-          cursor: "pointer",
-          height: "3.5vw",
-          width: "11vw",
-          display: "flex",
-          alignItems: "center",
-          borderRadius: "20px",
-          backgroundColor: "#c2e7ff",
-        }}
-      >
-        <img src={pen} alt="" style={{ width: "1.2vw", marginLeft: "1.5vw" }} />
-        <h4 style={{ marginLeft: "1vw", fontWeight: "400", fontSize: "1vw" }}>
-          Compose
-        </h4>
-      </div> */}
+      
 
       <Message />
 
@@ -43,17 +46,19 @@ function Leftpanel(props) {
         style={{
           marginTop: "1vw",
           marginLeft: "-1vw",
-          width: "12vw",
           display: "flex",
           alignItems: "center",
-          paddingTop: "1vw",
+          borderRadius:"20px",
+          paddingTop:"10px",
+          paddingBottom:"10px",
+          backgroundColor: hoveredItem === "Inbox" || activeItem === "Inbox" ? "#e0e0e0" : "transparent", //Conditional!!
+          fontWeight: activeItem === "Inbox" ? "bold" : "400", //Conditional!!
         }}
+        onMouseEnter={() => handleMouseEnter("Inbox")}
+        onMouseLeave={handleMouseLeave}
+        onClick={() => handleClick("Inbox")}
       >
-        <img
-          src={
-            // "https://ssl.gstatic.com/ui/v1/icons/mail/gm3/1x/inbox_fill_baseline_p900_20dp.png"
-            inbox
-          }
+        <img src={inbox}
           alt=""
           style={{ width: "1vw", marginLeft: "2.5vw" }}
         />
@@ -62,21 +67,28 @@ function Leftpanel(props) {
           style={{
             cursor: "pointer",
             marginLeft: "1.6vw",
-            fontWeight: "400",
             fontSize: ".9vw",
           }}
         >
           Inbox
         </span>
       </div>
+
       <div
         style={{
-          marginTop: "1vw",
           marginLeft: "-1vw",
-          width: "12vw",
           display: "flex",
           alignItems: "center",
+          borderRadius:"20px",
+          paddingTop:"10px",
+          paddingBottom:"10px",
+          backgroundColor: hoveredItem === "Starred" || activeItem === "Starred" ? "#e0e0e0" : "transparent", //Conditional!!
+          fontWeight: activeItem === "Starred" || hoveredItem === "Starred" ? "bold" : "400",
+
         }}
+        onMouseEnter={() => handleMouseEnter("Starred")}
+        onMouseLeave={handleMouseLeave}
+        onClick={() => handleClick("Starred")}
       >
         <img src={star} alt="" style={{ width: "1vw", marginLeft: "2.5vw" }} />
         <span
@@ -84,7 +96,6 @@ function Leftpanel(props) {
           style={{
             cursor: "pointer",
             marginLeft: "1.6vw",
-            fontWeight: "400",
             fontSize: ".9vw",
           }}
         >
@@ -93,12 +104,18 @@ function Leftpanel(props) {
       </div>
       <div
         style={{
-          marginTop: "1vw",
           marginLeft: "-1vw",
-          width: "12vw",
           display: "flex",
           alignItems: "center",
+          borderRadius:"20px",
+          paddingTop:"10px",
+          paddingBottom:"10px",
+          backgroundColor: hoveredItem === "Snoozed" || activeItem === "Snoozed" ? "#e0e0e0" : "transparent", //Conditional!!
+          fontWeight: activeItem === "Snoozed" ? "bold" : "400",
         }}
+        onMouseEnter={() => handleMouseEnter("Snoozed")}
+        onMouseLeave={handleMouseLeave}
+        onClick={() => handleClick("Snoozed")}
       >
         <img src={snooze} alt="" style={{ width: "1vw", marginLeft: "2.5vw" }} />
         <span
@@ -106,7 +123,6 @@ function Leftpanel(props) {
           style={{
             cursor: "pointer",
             marginLeft: "1.6vw",
-            fontWeight: "400",
             fontSize: ".9vw",
           }}
         >
@@ -115,19 +131,25 @@ function Leftpanel(props) {
       </div>
       <div
         style={{
-          marginTop: "1vw",
           marginLeft: "-1vw",
-          width: "12vw",
           display: "flex",
           alignItems: "center",
+          borderRadius:"20px",
+          paddingTop:"10px",
+          paddingBottom:"10px",
+          backgroundColor: hoveredItem === "Sent" || activeItem === "Sent" ? "#e0e0e0" : "transparent", //Conditional!!
+          fontWeight: activeItem === "Sent" ? "bold" : "400",
         }}
+        onMouseEnter={() => handleMouseEnter("Sent")}
+        onMouseLeave={handleMouseLeave}
+        onClick={() => handleClick("Sent")}
       >
         <img src={send} alt="" style={{ width: "1vw", marginLeft: "2.5vw" }} />
         <span
+          onClick={() => props.setSubCollect("Sent")}
           style={{
             cursor: "pointer",
             marginLeft: "1.6vw",
-            fontWeight: "400",
             fontSize: ".9vw",
           }}
         >
@@ -136,12 +158,18 @@ function Leftpanel(props) {
       </div>
       <div
         style={{
-          marginTop: "1vw",
           marginLeft: "-1vw",
-          width: "12vw",
           display: "flex",
           alignItems: "center",
+          borderRadius:"20px",
+          paddingTop:"10px",
+          paddingBottom:"10px",
+          backgroundColor: hoveredItem === "Drafts" || activeItem === "Drafts" ? "#e0e0e0" : "transparent", //Conditional!!
+          fontWeight: activeItem === "Drafts" ? "bold" : "400",
         }}
+        onMouseEnter={() => handleMouseEnter("Drafts")}
+        onMouseLeave={handleMouseLeave}
+        onClick={() => handleClick("Drafts")}
       >
         <img
           src={
@@ -150,11 +178,11 @@ function Leftpanel(props) {
           alt=""
           style={{ width: "1.1vw", marginLeft: "2.5vw" }}
         />
-        <span
+        <span onClick={() => props.setSubCollect("Drafts")}
+
           style={{
             cursor: "pointer",
             marginLeft: "1.6vw",
-            fontWeight: "500",
             fontSize: ".9vw",
           }}
         >
@@ -164,7 +192,6 @@ function Leftpanel(props) {
           style={{
             cursor: "pointer",
             marginLeft: "5.1vw",
-            fontWeight: "500",
             fontSize: ".7vw",
           }}
         >
@@ -173,12 +200,18 @@ function Leftpanel(props) {
       </div>
       <div
         style={{
-          marginTop: "1vw",
           marginLeft: "-1vw",
-          width: "12vw",
           display: "flex",
           alignItems: "center",
+          borderRadius:"20px",
+          paddingTop:"10px",
+          paddingBottom:"10px",
+          backgroundColor: hoveredItem === "Trash" || activeItem === "Trash" ? "#e0e0e0" : "transparent", //Conditional!!
+          fontWeight: activeItem === "Trash" ? "bold" : "400",
         }}
+        onMouseEnter={() => handleMouseEnter("Trash")}
+        onMouseLeave={handleMouseLeave}
+        onClick={() => handleClick("Trash")}
       >
         <img
           src={
@@ -187,11 +220,11 @@ function Leftpanel(props) {
           alt=""
           style={{ width: "1.1vw", marginLeft: "2.5vw" }}
         />
-        <span
+        <span onClick={() => props.setSubCollect("Trash")}
+
           style={{
             cursor: "pointer",
             marginLeft: "1.6vw",
-            fontWeight: "400",
             fontSize: ".9vw",
           }}
         >
@@ -218,7 +251,6 @@ function Leftpanel(props) {
           style={{
             cursor: "pointer",
             marginLeft: "1.6vw",
-            fontWeight: "400",
             fontSize: ".9vw",
           }}
         >
@@ -239,7 +271,6 @@ function Leftpanel(props) {
           style={{
             cursor: "pointer",
             marginLeft: "2.5vw",
-            fontWeight: "500",
             fontSize: "1vw",
             marginTop: "2vw",
           }}
@@ -251,7 +282,6 @@ function Leftpanel(props) {
           style={{
             cursor: "pointer",
             marginLeft: "5vw",
-            fontWeight: "500",
             fontSize: ".7vw",
             marginTop: "2vw",
           }}
@@ -268,12 +298,18 @@ function Leftpanel(props) {
 
       <div
         style={{
-          marginTop: "1vw",
           marginLeft: "-1vw",
-          width: "12vw",
           display: "flex",
           alignItems: "center",
+          borderRadius:"20px",
+          paddingTop:"10px",
+          paddingBottom:"10px",
+          backgroundColor: hoveredItem === "ClickUp" || activeItem === "ClickUp" ? "#e0e0e0" : "transparent", //Conditional!!
+          fontWeight: activeItem === "ClickUp" ? "bold" : "400",
         }}
+        onMouseEnter={() => handleMouseEnter("ClickUp")}
+        onMouseLeave={handleMouseLeave}
+        onClick={() => handleClick("ClickUp")}
       >
         <img
           src={
@@ -282,11 +318,10 @@ function Leftpanel(props) {
           alt=""
           style={{ width: "1.2vw", marginLeft: "2.5vw" }}
         />
-        <span
+        <span onClick={() => props.setSubCollect("ClickUp")}
           style={{
             cursor: "pointer",
             marginLeft: "1.2vw",
-            fontWeight: "500",
             fontSize: ".9vw",
           }}
         >
@@ -296,7 +331,6 @@ function Leftpanel(props) {
           style={{
             cursor: "pointer",
             marginLeft: "4.5vw",
-            fontWeight: "500",
             fontSize: ".7vw",
           }}
         >

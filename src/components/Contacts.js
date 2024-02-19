@@ -26,10 +26,7 @@ export default function Contacts() {
   const [contactsData, setContactsData] = React.useState([]);
 
   const addContacts = () => {
-    // Modify this function based on your requirements
-    // For UI-only, you can add some local state or handle the logic as needed
-    // You can simulate adding a contact to the local state if needed.
-    // For example:
+
     setContactsData((prevData) => [...prevData, { name, mobile }]);
   };
 

@@ -110,21 +110,19 @@ function Middle(props) {
 
       {dummyEmails.map((data) => (
         <Paper
-          onMouseEnter={() => setCellHover((prev) => ({ ...prev, [data.id]: true }))}
-          onMouseLeave={() =>
-            setCellHover((prev) => ({ ...prev, [data.id]: false }))
-          }
-          elevation={0}
-          key={data.id}
-          style={{
-            backgroundColor: "#F8FCFF",
-            borderBottom: "1px solid #EFEFEF",
-            borderTop: "1px solid #EFEFEF",
-            height: "3.2vw",
-          }}
+        onMouseEnter={() => setCellHover((prev) => ({ ...prev, [data.id]: true }))}
+        onMouseLeave={() => setCellHover((prev) => ({ ...prev, [data.id]: false }))}
+        elevation={0}
+        key={data.id}
+        style={{
+          backgroundColor: "#F8FCFF",
+          borderBottom: `1px solid ${cellHover[data.id] ? "#202124" : "#EFEFEF"}`,
+          borderTop: `1px solid ${cellHover[data.id] ? "#202124" : "#EFEFEF"}`,
+          height: "3.2vw",
+        }}
         >
           <ListItem style={{ position: "relative" }}>
-            <Checkbox {...label} style={{ marginRight: "0.5vw" }} />
+            <Checkbox {...label} style={{ marginRight: "0.5vw", }} />
 
             {data.starred ? (
               <img
